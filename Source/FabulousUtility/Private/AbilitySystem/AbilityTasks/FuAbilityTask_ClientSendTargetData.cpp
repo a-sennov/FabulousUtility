@@ -29,7 +29,7 @@ void UFuAbilityTask_ClientSendTargetData::Activate()
 
 	// ReSharper disable once CppLocalVariableWithNonTrivialDtorIsNeverUsed
 	FScopedPredictionWindow PredictionWindow{
-		AbilitySystemComponent,
+		AbilitySystemComponent.Get(),
 		!Ability->GetCurrentActorInfo()->IsNetAuthority() && !AbilitySystemComponent->ScopedPredictionKey.IsValidForMorePrediction()
 	};
 
@@ -49,7 +49,7 @@ void UFuAbilityTask_ClientSendTargetData::Activate()
 
 void UFuAbilityTask_ClientSendTargetData::OnDestroy(const bool bInOwnerFinished)
 {
-	if (IsValid(AbilitySystemComponent))
+	if (AbilitySystemComponent.IsValid())
 	{
 		AbilitySystemComponent->AbilityTargetDataSetDelegate(GetAbilitySpecHandle(), GetActivationPredictionKey()).RemoveAll(this);
 	}

@@ -32,7 +32,7 @@ void UFuAbilityTask_ServerReceiveTargetData::Activate()
 
 void UFuAbilityTask_ServerReceiveTargetData::OnDestroy(const bool bInOwnerFinished)
 {
-	if (IsValid(AbilitySystemComponent))
+	if (AbilitySystemComponent.IsValid())
 	{
 		AbilitySystemComponent->AbilityTargetDataSetDelegate(GetAbilitySpecHandle(), GetActivationPredictionKey()).RemoveAll(this);
 	}
